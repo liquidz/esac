@@ -22,8 +22,8 @@ WARNING: This library is under development
   ::default)
 
 (esac/match?
-  [1 2 {:foo "bar" :hello {:value "world"}}]
-  [odd? _ {:hello {:value #"^wo"}}]) ;; => true
+ [1 2 {:foo "bar" :hello {:value "world"}}]
+ [odd? _ {:hello {:value #"^wo"}}]) ;; => true
 
 (esac/match? [3 1 2] [1 2 3]) ;; => false
 (esac/match? [3 1 2] ^:in-any-order [1 2 3]) ;; => true
