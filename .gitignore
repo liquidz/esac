@@ -1,0 +1,17 @@
+/target
+/classes
+/checkouts
+profiles.clj
+pom.xml
+pom.xml.asc
+.clj-kondo/.cache
+.cljs_graaljs_repl
+.cljs_node_repl
+node_modules
+out
+*.jar
+*.class
+/.lein-*
+/.nrepl-port
+.hgignore
+.hg/
