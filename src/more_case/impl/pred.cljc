@@ -37,30 +37,28 @@
   [e [k v]]
   (generate-pred `(get ~e ~k) v))
 
-(defn- generate-any-order-vector-pred
-  [e p]
-  (let [result (gensym)
-          tmp (gensym)
-          bindings (mapcat (fn [v]
-                             `(~result (when-let [k# (and ~result
-                                                          (some (fn [~tmp] (and ~(generate-pred tmp v) ~tmp))
-                                                                ~result))]
-                                         (disj ~result k#))))
-                           p)]
-      `(let [~result (set ~e)
-             ~@bindings]
-         (empty? ~result)))
-  )
+(defn- generate-vector-pred-in-any-order
+  [e pred]
+  (let [res (gensym)
+        tmp (gensym)
+        bindings (mapcat (fn [item]
+                           `(~res (some->> ~res
+                                           (some (fn [~tmp] (and ~(generate-pred tmp item) ~tmp)))
+                                           (disj ~res))))
+                         (set pred))]
+    `(let [~res (set ~e)
+           ~@bindings]
+       (= #{} ~res))))
 
 (defmulti generate-pred (fn [_ pred] (clause-type pred)))
 (defmethod generate-pred ::any [e _] `(any? ~e))
-(defmethod generate-pred ::class [e p] `(instance? ~p ~e))
-(defmethod generate-pred ::var [e p] `(~p ~e))
-(defmethod generate-pred ::pattern [e p] `(and (string? ~e) (some? (re-seq ~p ~e))))
-(defmethod generate-pred ::list [e p] `(contains? ~(set p) ~e))
-(defmethod generate-pred ::map [e p] `(and ~@(map #(generate-map-pred e %) p)))
-(defmethod generate-pred ::vector [e p]
-  (if (:any-order (meta p))
-    (generate-any-order-vector-pred e p)
-    `(and ~@(map-indexed #(generate-map-pred e %&) p))))
-(defmethod generate-pred ::object [e p] `(= ~p ~e))
+(defmethod generate-pred ::class [e pred] `(instance? ~pred ~e))
+(defmethod generate-pred ::var [e pred] `(~pred ~e))
+(defmethod generate-pred ::pattern [e pred] `(and (string? ~e) (some? (re-seq ~pred ~e))))
+(defmethod generate-pred ::list [e pred] `(contains? ~(set pred) ~e))
+(defmethod generate-pred ::map [e pred] `(and ~@(map #(generate-map-pred e %) pred)))
+(defmethod generate-pred ::vector [e pred]
+  (if (:in-any-order (meta pred))
+    (generate-vector-pred-in-any-order e pred)
+    `(and ~@(map-indexed #(generate-map-pred e %&) pred))))
+(defmethod generate-pred ::object [e pred] `(= ~pred ~e))

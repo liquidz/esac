@@ -12,7 +12,8 @@
    :1.10.1 {:dependencies [[org.clojure/clojure "1.10.1"]]}
    :provided [:1.10.1 {:dependencies [[org.clojure/clojurescript "1.10.597"]]}]
    :test {:dependencies [[lambdaisland/kaocha "0.0-590"]
-                         [lambdaisland/kaocha-cljs "0.0-68"]]}
+                         [lambdaisland/kaocha-cljs "0.0-68"]
+                         [testdoc "0.1.0"]]}
    :dev [:test {:dependencies [[org.clojure/clojure "1.10.1"]]}]}
 
   :aliases

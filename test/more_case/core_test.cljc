@@ -1,10 +1,17 @@
 (ns more-case.core-test
   #?@(:clj
-      [(:require [clojure.test :as t] [more-case.core :as sut])]
+      [(:require [clojure.test :as t]
+                 [more-case.core :as sut]
+                 [testdoc.core])]
       :cljs
       [(:require
-        [cljs.test :as t :include-macros true]
-        [more-case.core :as sut :include-macros true])]))
+         [cljs.test :as t :include-macros true]
+         [more-case.core :as sut :include-macros true])]))
+
+#?(:clj
+   (t/deftest docstring-test
+     (t/is (testdoc #'sut/match?))
+     (t/is (testdoc #'sut/case))))
 
 (t/deftest match?-object-test
   (t/is (true? (sut/match? "hello" "hello")))
@@ -55,6 +62,19 @@
   (t/is (false? (sut/match? [1 2] [9 2])))
   (t/is (false? (sut/match? [1 2] [9 8])))
   (t/is (false? (sut/match? [1 2] [9]))))
+
+(t/deftest match?-vector-any-order-test
+  (t/is (true? (sut/match? [1 2 3] ^:in-any-order [1 2 3])))
+  (t/is (true? (sut/match? [2 3 1] ^:in-any-order [1 2 3])))
+  (t/is (true? (sut/match? [3 1 2] ^:in-any-order [1 2 3])))
+
+  (t/is (false? (sut/match? [2 3 1] [1 2 3])))
+  (t/is (false? (sut/match? [3 1 2] [1 2 3])))
+
+  (t/is (true? (sut/match? [{:a "x" :c "y"} {:a "b" :c "d"}]
+                           ^:in-any-order [{:a "b"} {:a "x"}])))
+  (t/is (false? (sut/match? [{:a "x" :c "y"} {:a "b" :c "d"}]
+                            [{:a "b"} {:a "x"}]))))
 
 (t/deftest match?-map-test
   (t/is (true? (sut/match? {:a :b :c :d} {:a :b :c :d})))
