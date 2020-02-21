@@ -1,7 +1,6 @@
 (ns esac.core
   (:refer-clojure :exclude [case])
   (:require
-   [clojure.set :as set]
    [esac.impl.pred :as i.pred]))
 
 (defmacro match?
