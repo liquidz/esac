@@ -1,4 +1,4 @@
-.PHONY: prepare test coverage clean
+.PHONY: prepare test coverage lint clean
 
 node_modules/ws:
 	npm install

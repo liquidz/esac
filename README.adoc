@@ -5,6 +5,7 @@ Advanced "case" library for Clojure(Script).
 image:https://github.com/liquidz/esac/workflows/test/badge.svg["GitHub Actions for test workflow", link="https://github.com/liquidz/esac/actions?query=workflow%3Atest"]
 image:https://github.com/liquidz/esac/workflows/lint/badge.svg["GitHub Actions for lint workflow", link="https://github.com/liquidz/esac/actions?query=workflow%3Alint"]
 image:https://codecov.io/gh/liquidz/esac/branch/master/graph/badge.svg["Codecov", link="https://codecov.io/gh/liquidz/esac"]
+image:https://img.shields.io/clojars/v/esac.svg["Clojars Project", link="https://clojars.org/esac"]
 
 WARNING: This library is under development
 
