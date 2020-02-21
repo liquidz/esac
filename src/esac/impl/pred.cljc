@@ -55,7 +55,7 @@
 (defmethod generate-pred ::class [e pred] `(instance? ~pred ~e))
 (defmethod generate-pred ::var [e pred] `(~pred ~e))
 (defmethod generate-pred ::pattern [e pred] `(and (string? ~e) (some? (re-seq ~pred ~e))))
-(defmethod generate-pred ::list [e pred] `(contains? ~(set pred) ~e))
+(defmethod generate-pred ::list [e pred] `(or ~@(map #(generate-pred e %) pred)))
 (defmethod generate-pred ::map [e pred] `(and ~@(map #(generate-map-pred e %) pred)))
 (defmethod generate-pred ::vector [e pred]
   (if (:in-any-order (meta pred))

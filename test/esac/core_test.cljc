@@ -44,7 +44,13 @@
 (t/deftest match?-list-test
   (t/is (true? (sut/match? 1 (1 2))))
   (t/is (true? (sut/match? 2 (1 2))))
-  (t/is (false? (sut/match? 3 (1 2)))))
+  (t/is (false? (sut/match? 3 (1 2))))
+
+  (let [try-odd? #(try (odd? %) (catch Exception _ false))
+        try-even? #(try (even? %) (catch Exception _ false))]
+    (t/is (true? (sut/match? 1 (try-odd? try-even?))))
+    (t/is (true? (sut/match? 2 (try-odd? try-even?))))
+    (t/is (false? (sut/match? 3.14 (try-odd? try-even?))))))
 
 (t/deftest match?-vector-test
   (t/is (true? (sut/match? [1 2] [1 2])))
