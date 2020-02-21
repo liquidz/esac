@@ -9,6 +9,12 @@
   => (match?
   =>  [1 2 {:foo \"bar\" :hello {:value \"world\"}}]
   =>  [odd? _ {:hello {:value #\"^wo\"}}])
+  true
+
+  => (match? [3 1 2] [1 2 3])
+  false
+
+  => (match? [3 1 2] ^:in-any-order [1 2 3])
   true"
   [e pred]
   (i.pred/generate-pred e pred))
@@ -26,8 +32,8 @@
 
   => (case 10
   =>   12            ::concrete-value
-  =>   (3 4)         ::one-of-them
   =>   number?       ::function
+  =>   (3 neg?)      ::one-of-them
   =>   Exception      ::class
   =>   #\"re\"         ::regexp
   =>   [5 _ [7]]     ::vector

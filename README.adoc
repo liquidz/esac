@@ -13,8 +13,8 @@ WARNING: This library is under development
 
 (esac/case ANY_VALUE
   12            ::concrete-value
-  (3 4)         ::one-of-them
   number?       ::function
+  (3 neg?)      ::one-of-them
   Exception     ::class
   #"re"         ::regexp
   [5 _ [7]]     ::vector
@@ -23,8 +23,10 @@ WARNING: This library is under development
 
 (esac/match?
   [1 2 {:foo "bar" :hello {:value "world"}}]
-  [odd? _ {:hello {:value #"^wo"}}])
-;; => true
+  [odd? _ {:hello {:value #"^wo"}}]) ;; => true
+
+(esac/match? [3 1 2] [1 2 3]) ;; => false
+(esac/match? [3 1 2] ^:in-any-order [1 2 3]) ;; => true
 ----
 
 == License
