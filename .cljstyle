@@ -1,5 +1,7 @@
 {
  :list-indent-size 1
  :insert-padding-lines? false
+ :file-ignore #{".cljs_node_repl"
+                ".cljs_graaljs_repl"}
  }
 ; vim:ft=clojure

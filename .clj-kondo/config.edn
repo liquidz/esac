@@ -1,10 +1,14 @@
 {
  :linters {:unresolved-symbol
-           {:exclude [(esac.core/match? [_])]}
+           {:exclude [(clojure.test/is [testdoc])
+                      (esac.core/match? [_])
+                      ]
+            }
 
            :not-a-function
            {:skip-args [esac.core/match?
-                        esac.core/case]}
+                        esac.core/case]
+            }
            }
 
 

@@ -10,6 +10,10 @@ test: prepare
 coverage:
 	lein cloverage --codecov
 
+lint:
+	clj-kondo --lint src:test
+	cljstyle check
+
 clean:
 	lein clean
 	\rm -rf node_modules
