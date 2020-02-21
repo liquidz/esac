@@ -12,12 +12,13 @@ WARNING: This library is under development
 (require '[esac.core :as esac])
 
 (esac/case ANY_VALUE
-  12           ::concrete-value
-  (3 4)        ::one-of-them
-  number?      ::function
-  #"re"        ::regexp
-  [5 _ [7]]    ::vector
-  {:a {:b :c}} ::map
+  12            ::concrete-value
+  (3 4)         ::one-of-them
+  number?       ::function
+  Exception     ::class
+  #"re"         ::regexp
+  [5 _ [7]]     ::vector
+  {:a {:b :c}}  ::map
   ::default)
 
 (esac/match?
