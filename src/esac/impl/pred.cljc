@@ -1,4 +1,4 @@
-(ns more-case.impl.pred
+(ns esac.impl.pred
   #?(:clj
      (:import
       (clojure.lang

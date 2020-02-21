@@ -1,12 +1,12 @@
-(ns more-case.core-test
+(ns esac.core-test
   #?@(:clj
       [(:require [clojure.test :as t]
-                 [more-case.core :as sut]
+                 [esac.core :as sut]
                  [testdoc.core])]
       :cljs
       [(:require
          [cljs.test :as t :include-macros true]
-         [more-case.core :as sut :include-macros true])]))
+         [esac.core :as sut :include-macros true])]))
 
 #?(:clj
    (t/deftest docstring-test

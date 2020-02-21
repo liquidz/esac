@@ -1,10 +1,10 @@
 {
  :linters {:unresolved-symbol
-           {:exclude [(more-case.core/match? [_])]}
+           {:exclude [(esac.core/match? [_])]}
 
            :not-a-function
-           {:skip-args [more-case.core/match?
-                        more-case.core/case]}
+           {:skip-args [esac.core/match?
+                        esac.core/case]}
            }
 
 

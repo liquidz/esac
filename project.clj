@@ -1,4 +1,4 @@
-(defproject more-case "0.1.0-SNAPSHOT"
+(defproject esac "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
@@ -21,4 +21,4 @@
    "test-clj" ["with-profile" "test,1.9:test,1.10:test,1.10.1" "test"]
    "test-all" ["do" ["test-clj"] ["test-kaocha"]]}
 
-  :repl-options {:init-ns more-case.core})
+  :repl-options {:init-ns esac.core})

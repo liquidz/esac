@@ -1,8 +1,8 @@
-(ns more-case.core
+(ns esac.core
   (:refer-clojure :exclude [case])
   (:require
    [clojure.set :as set]
-   [more-case.impl.pred :as i.pred]))
+   [esac.impl.pred :as i.pred]))
 
 (defmacro match?
   "FIXME
