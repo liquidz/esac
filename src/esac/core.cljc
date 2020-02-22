@@ -17,7 +17,9 @@
   => (match? [3 1 2] ^:in-any-order [1 2 3])
   true"
   [e pred]
-  (i.pred/generate-pred e pred))
+  (let [e' (gensym)]
+    `(let [~e' ~e]
+       ~(i.pred/generate-pred e' pred))))
 
 (defmacro case
   "Takes an expression, and a set of clauses.
